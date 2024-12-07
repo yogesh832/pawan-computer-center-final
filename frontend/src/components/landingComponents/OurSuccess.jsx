@@ -1,9 +1,10 @@
 import React from "react";
 
 const OurSuccess = () =>{
+    return(
     <div>
-        
-    </div>
+        This is our success
+    </div>)
 }
 
 export default OurSuccess;
