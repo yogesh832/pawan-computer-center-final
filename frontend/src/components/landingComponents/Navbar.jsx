@@ -3,20 +3,18 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // State for menu toggle
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleButtonClick = () => {
-    // Close the menu after clicking Register or Sign In button
     setIsMenuOpen(false);
   };
 
   const toggleMenu = () => {
-    // Toggle the menu visibility for mobile view
     setIsMenuOpen(!isMenuOpen);
   };
 
   return (
-    <nav className="bg-[#f3f2f8] px-5 flex justify-between items-center py-4">
+    <nav className="bg-[#f3f2f8] px-5 flex justify-between items-center py-4 relative">
       {/* Logo Section */}
       <div>
         <Link to="/">
@@ -24,41 +22,26 @@ const Navbar = () => {
         </Link>
       </div>
 
-      {/* Menu Links */}
+      {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6">
-        <Link
-          to="/"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
+        <Link to="/" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Home
         </Link>
-        <Link
-          to="/about"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
+        <Link to="/about" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           About
         </Link>
-        <Link
-          to="/course"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
+        <Link to="/course" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Courses
         </Link>
-        <Link
-          to="/contact"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
+        <Link to="/contact" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Contact
         </Link>
-        <Link
-          to="/gallery"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
+        <Link to="/gallery" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Gallery
         </Link>
       </div>
 
-      {/* Register and Sign In Buttons */}
+      {/* Desktop Buttons */}
       <div className="hidden md:flex space-x-4">
         <Link
           to="/signup"
@@ -79,58 +62,61 @@ const Navbar = () => {
       {/* Mobile Menu Button */}
       <div className="md:hidden flex items-center">
         <button onClick={toggleMenu} className="text-gray-700">
-          <span className="material-icons">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke-width="1.5"
-              stroke="currentColor"
-              class="size-6"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-              />
-            </svg>
-          </span>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="w-6 h-6"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+            />
+          </svg>
         </button>
       </div>
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute top-28 left-0 w-full bg-[#f3f2f8] py-4 flex flex-col items-center space-y-4">
+        <div className="md:hidden absolute top-32 left-0 w-full bg-[#f3f2f8] py-4 flex flex-col items-center space-y-4 shadow-lg z-50">
           <Link
-          to="/"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
-          Home
-        </Link>
-        <Link
-          to="/about"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
-          About
-        </Link>
-        <Link
-          to="/course"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
-          Courses
-        </Link>
-        <Link
-          to="/contact"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
-          Contact
-        </Link>
-        <Link
-          to="/gallery"
-          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
-        >
-          Gallery
-        </Link>
+            to="/"
+            className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+            onClick={handleButtonClick}
+          >
+            Home
+          </Link>
+          <Link
+            to="/about"
+            className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+            onClick={handleButtonClick}
+          >
+            About
+          </Link>
+          <Link
+            to="/course"
+            className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+            onClick={handleButtonClick}
+          >
+            Courses
+          </Link>
+          <Link
+            to="/contact"
+            className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+            onClick={handleButtonClick}
+          >
+            Contact
+          </Link>
+          <Link
+            to="/gallery"
+            className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+            onClick={handleButtonClick}
+          >
+            Gallery
+          </Link>
 
           <Link to="/signup">
             <button
@@ -143,7 +129,7 @@ const Navbar = () => {
 
           <Link to="/login">
             <button
-              className="w-32 px-4 py-2 bg-gray-200 text-gray-700 text-center rounded-3xl hover:bg-gray-200 text-sm transition duration-300 ease-in-out"
+              className="w-32 px-4 py-2 bg-gray-200 text-gray-700 text-center rounded-3xl hover:bg-gray-300 text-sm transition duration-300 ease-in-out"
               onClick={handleButtonClick}
             >
               Sign In
