@@ -1,18 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import heroimg from "../../assets/heroimg.png";
+import heroimgsmallscreen from "../../assets/heroimg-smallscreen.png";
 
 const Hero = () => {
+  const [image, setImage] = useState(heroimg);
+
+  const updateImage = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 1024) {  // Below tablet size
+      setImage(heroimgsmallscreen);
+    } else {
+      setImage(heroimg);
+    }
+  };
+
+  useEffect(() => {
+    // Set the initial image on mount
+    updateImage();
+    
+    // Update image on window resize
+    window.addEventListener("resize", updateImage);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", updateImage);
+    };
+  }, []);
+
   return (
     <div className="relative w-full h-[100vh]">
       {/* Hero Image */}
       <img
-        src={heroimg}
+        src={image}
         alt="Hero"
         className="w-full h-full object-cover rounded-b-3xl"
       />
 
-      <div className="absolute inset-0  rounded-b-3xl"></div>
+      <div className="absolute inset-0 rounded-b-3xl"></div>
 
       {/* Text Section */}
       <div className="absolute inset-0 flex items-center justify-start p-8 sm:p-16 lg:p-24 text-black">
