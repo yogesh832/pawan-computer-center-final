@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFileInvoice, FaCalendarAlt, FaUsers } from "react-icons/fa";
+import featureimg from "../../assets/featureimg.png";
 
 const Features = () => {
   return (
