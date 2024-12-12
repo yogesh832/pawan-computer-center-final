@@ -7,7 +7,7 @@ const WhatIs = () => {
     <div className="py-8 md:py-12 bg-gray-50">
       <div className="max-w-[90vw] md:max-w-[80vw] mx-auto text-center px-4 md:px-16 lg:px-8">
         <h2 className="text-2xl font-bold mb-4">
-          What is <span className="text-blue-500">PCC</span>
+          What is <span className="text-[#00cdc4]">PCC</span>
         </h2>
         <p className="text-gray-600 mb-8 max-w-3xl mx-auto">
           PCC ( Pawan Computer Center ) is a platform that allows educators to
