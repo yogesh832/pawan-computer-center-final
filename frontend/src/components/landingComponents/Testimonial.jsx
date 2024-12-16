@@ -51,16 +51,27 @@ const Testimonial = () => {
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-between px-6">
         {/* Left Section (Text and Button) */}
         <div className="mb-6 md:mb-0 w-full md:w-1/2">
-          <h2 className="text-3xl font-bold text-gray-800 mb-4">What They Say?</h2>
-          <p className="text-gray-600 mb-4">
+          <div className="flex items-center">
+            <hr className="w-28 border-t-2 border-[#00cdc4]" />
+            <p className="text-center font-semibold text-[#FF7352]">
+              TESTIMONIAL
+            </p>
+            <hr className="w-28 border-t-2 border-[#00cdc4]" />
+          </div>
+
+          <h2 className="text-5xl font-bold text-[#00cdc4] mb-4 mt-6">
+            What They Say?
+          </h2>
+
+          <p className="text-gray-600 mb-4 text-lg">
             TOTC has got more than 100k positive ratings from our users around
             the world.
           </p>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-6 text-lg">
             Some of the students and teachers were greatly helped by the
             Skilline.
           </p>
-          <p className="text-gray-600 mb-6">
+          <p className="text-gray-600 mb-6 text-lg">
             Are you too? Please give your assessment
           </p>
           <button className="bg-teal-400 text-white px-6 py-2 rounded-md hover:bg-teal-500">

@@ -7,7 +7,7 @@ const Features = () => {
     <div className="flex flex-col items-center bg-gray-50 px-4 md:px-16 lg:px-32 py-4 md:py-8 w-full">
       {/* Heading and Description */}
       <div className="text-center">
-        <h2 className="text-[2.5rem] font-bold mb-4 mt-32">
+        <h2 className="text-[2.5rem] font-bold mb-4 mt-20">
           <span className="text-[#FF7352]">All-In-One </span>{" "}
           <span className="text-[#00cdc4]"> Cloud Software</span>
         </h2>
