@@ -4,7 +4,7 @@ import featureimg from "../../assets/featureimg.png";
 
 const Features = () => {
   return (
-    <div className="">
+    <div className=""> 
       <section className="bg-white py-12 px-6 lg:px-20">
         <div className="max-w-6xl mx-auto">
           {/* Header Section */}
