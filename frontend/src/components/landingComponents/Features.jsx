@@ -4,16 +4,18 @@ import featureimg from "../../assets/featureimg.png";
 
 const Features = () => {
   return (
-    <div className=""> 
-      <section className="bg-white py-12 px-6 lg:px-20">
-        <div className="max-w-6xl mx-auto">
-          {/* Header Section */}
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-bold text-gray-800">Our Features</h2>
-            <p className="text-gray-600 mt-2">
-              This very extraordinary feature can make learning activities more efficient.
-            </p>
-          </div>
+    <div className="flex flex-col items-center bg-gray-50 px-4 md:px-16 lg:px-32 py-4 md:py-8 w-full">
+      {/* Heading and Description */}
+      <div className="text-center">
+        <h2 className="text-[2.5rem] font-bold mb-4 mt-20">
+          <span className="text-[#FF7352]">All-In-One </span>{" "}
+          <span className="text-[#00cdc4]"> Cloud Software</span>
+        </h2>
+        <p className="text-gray-600 mb-8 text-lg max-w-3xl mx-auto mt-4">
+          TOTC is one powerful online software suite that combines all the tools
+          needed to run a successful school or office.
+        </p>
+      </div>
 
       {/* Features Section */}
       <div className="flex flex-col md:flex-row justify-center gap-6 w-full">
