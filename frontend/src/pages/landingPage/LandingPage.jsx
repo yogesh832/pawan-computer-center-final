@@ -10,7 +10,7 @@ import ClassroomFeature from "../../components/landingComponents/ClassroomFeatur
 
 const LandingPage = () =>{
     return(
-        <div>
+        <div className="bg-gray-50">
             <Navbar />
             <Hero />
             <OurSuccess />
