@@ -1,25 +1,29 @@
 import React, { useState, useEffect } from "react";
 import { FaStar } from "react-icons/fa";
+import { IoIosArrowRoundForward } from "react-icons/io";
+import testimonialsimgOne from "../../assets/testimonialimg1.png"; // Import the image
+import testimonialsimgTwo from "../../assets/testimonialimg2.png"
+import testimonialsimgThree from "../../assets/testimonialimg3.png"
 
 const Testimonial = () => {
   const testimonials = [
     {
       name: "Gloria Rose",
-      image: "https://randomuser.me/api/portraits/women/44.jpg", // Replace with actual images
+      image: testimonialsimgOne, // Use the imported testimonials image
       text: `"Thank you so much for your help. It's exactly what I've been looking for. You won't regret it. It really saves me time and effort. TOTC is exactly what our business has been lacking."`,
-      rating: 5,
+      rating: 4,
       reviews: "12 reviews at Yelp",
     },
     {
       name: "John Smith",
-      image: "https://randomuser.me/api/portraits/men/45.jpg", // Replace with actual images
+      image: testimonialsimgTwo, // Use the same image for all testimonials
       text: `"TOTC has revolutionized the way we approach online learning. It's an incredibly helpful tool that has helped us increase efficiency and engagement."`,
       rating: 5,
       reviews: "20 reviews at Google",
     },
     {
       name: "Emily Adams",
-      image: "https://randomuser.me/api/portraits/women/46.jpg", // Replace with actual images
+      image: testimonialsimgThree, // Use the same image for all testimonials
       text: `"A fantastic platform that has made our online classes more engaging and organized. I highly recommend it for both teachers and students!"`,
       rating: 5,
       reviews: "8 reviews at Yelp",
@@ -74,47 +78,59 @@ const Testimonial = () => {
           <p className="text-gray-600 mb-6 text-lg">
             Are you too? Please give your assessment
           </p>
-          <button className="bg-teal-400 text-white px-6 py-2 rounded-md hover:bg-teal-500">
+
+          <button className="flex items-center mt-2 px-8 py-4  bg-[#00cdc4] text-xl text-white rounded-full hover:bg-[#00b5a5] transition">
             Write your assessment
+            <IoIosArrowRoundForward className="text-2xl" />
           </button>
         </div>
 
         {/* Right Section (Carousel for Image and Testimonial) */}
-        <div className="w-full md:w-1/2">
+        <div className="w-full md:w-1/2 relative">
           <div className="flex flex-col items-center">
-            <div className="relative mb-4">
+            <div className="relative mb-6">
               <img
                 src={testimonials[currentIndex].image}
                 alt={testimonials[currentIndex].name}
-                className="h-48 w-48 rounded-full object-cover"
+                className="object-cover rounded-lg w-3/4 shadow-lg"
               />
             </div>
-            <div className="bg-white shadow-xl p-6 rounded-lg w-full max-w-xs">
-              <p className="text-gray-800 font-semibold mb-2">
-                {testimonials[currentIndex].text}
-              </p>
-              <p className="text-sm text-gray-600 mb-2">
-                {testimonials[currentIndex].name}
-              </p>
-              <div className="flex items-center text-yellow-400">
-                {[...Array(testimonials[currentIndex].rating)].map((_, i) => (
-                  <FaStar key={i} />
-                ))}
+
+            <div className="absolute bottom-4 border-s-8 border-s-[#FF7352] right-0 bg-white shadow-xl p-6 rounded-lg w-full max-w-xl h-60">
+              <div className="border-s-4 border-s-gray-400">
+                <p className="text-gray-800 font-semibold ml-2 mb-2 text-lg leading-relaxed">
+                  {testimonials[currentIndex].text}
+                </p>
               </div>
-              <p className="text-sm text-gray-600 mt-2">
-                {testimonials[currentIndex].reviews}
-              </p>
+              <div className="flex justify-between items-center">
+                <p className="text-sm text-gray-600 font-medium -mb-6">
+                  {testimonials[currentIndex].name}
+                </p>
+
+                <div className="flex flex-col items-end">
+                  <div className="flex items-center text-yellow-400 mb-1">
+                    {[...Array(testimonials[currentIndex].rating)].map(
+                      (_, i) => (
+                        <FaStar key={i} />
+                      )
+                    )}
+                  </div>
+                  <p className="text-sm text-gray-600 mt-2">
+                    {testimonials[currentIndex].reviews}
+                  </p>
+                </div>
+              </div>
             </div>
-            <div className="flex justify-between mt-4 w-full">
+            <div className="flex justify-between mt-6 w-full max-w-xs">
               <button
                 onClick={prevTestimonial}
-                className="text-teal-400 hover:text-teal-500"
+                className="text-teal-400 hover:text-teal-500 hidden"
               >
                 Previous
               </button>
               <button
                 onClick={nextTestimonial}
-                className="text-teal-400 hover:text-teal-500"
+                className="text-teal-400 hover:text-teal-500 hidden"
               >
                 Next
               </button>
