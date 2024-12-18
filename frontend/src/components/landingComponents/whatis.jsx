@@ -25,8 +25,8 @@ const WhatIs = () => {
       className="h-full w-full object-cover"
     />
     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-      <p className="text-lg font-semibold">FOR INSTRUCTORS</p>
-      <button className="mt-2 px-4 py-2 bg-transparent border-white border text-sm rounded-full hover:bg-white hover:text-black transition">
+      <p className="text-3xl font-semibold">FOR INSTRUCTORS</p>
+      <button className="mt-2 px-6 py-3 bg-transparent border-white border text-xl rounded-full hover:bg-white hover:text-black transition">
         Start a class today
       </button>
     </div>
@@ -40,8 +40,8 @@ const WhatIs = () => {
       className="h-full w-full object-cover"
     />
     <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white">
-      <p className="text-lg font-semibold">FOR STUDENTS</p>
-      <button className="mt-2 px-4 py-2 bg-[#00cdc4] text-white text-sm rounded-full hover:bg-[#00b5a5] transition">
+      <p className="text-3xl font-semibold">FOR STUDENTS</p>
+      <button className="mt-2 px-6 py-3 bg-[#00cdc4] text-white text-xl rounded-full hover:bg-[#00b5a5] transition">
         Enter access code
       </button>
     </div>

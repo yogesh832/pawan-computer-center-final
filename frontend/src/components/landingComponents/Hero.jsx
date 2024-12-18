@@ -55,7 +55,7 @@ const Hero = () => {
             career today!
           </p>
           <Link to="/contact">
-            <button className="flex items-center px-6 py-3 bg-[#00cdc4] text-white rounded-full hover:bg-[#00b5a5] transition duration-300 ease-in-out text-base">
+            <button className="flex items-center px-8 py-4 bg-[#00cdc4] text-white rounded-full hover:bg-[#00b5a5] transition duration-300 ease-in-out text-base">
               Get Started
               <svg
                 xmlns="http://www.w3.org/2000/svg"
