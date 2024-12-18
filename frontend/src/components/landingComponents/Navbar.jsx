@@ -41,13 +41,13 @@ const Navbar = () => {
         <Link to="/" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Home
         </Link>
-        <Link to="/about" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link to="/aboutus" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           About
         </Link>
         <Link to="/course" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Courses
         </Link>
-        <Link to="/contact" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link to="/contactus" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
           Contact
         </Link>
         <Link to="/gallery" className="text-gray-700 hover:text-[#00cdc4] transition-colors">

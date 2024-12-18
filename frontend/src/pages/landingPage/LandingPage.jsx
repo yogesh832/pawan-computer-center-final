@@ -7,6 +7,7 @@ import Features from "../../components/landingComponents/Features";
 import Footer from "../../components/landingComponents/Footer";
 import Testimonial from "../../components/landingComponents/Testimonial";
 import ClassroomFeature from "../../components/landingComponents/ClassroomFeature";
+import MiniAboutUs from "../../components/landingComponents/miniAboutUs";
 
 const LandingPage = () =>{
     return(
@@ -18,6 +19,7 @@ const LandingPage = () =>{
             <WhatIs />
             <Testimonial />
             <ClassroomFeature />
+            <MiniAboutUs />
             <Footer />
         </div>
     )

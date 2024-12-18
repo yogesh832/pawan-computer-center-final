@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="flex items-center space-x-2">
             <div className="text-xl font-bold text-teal-400">PCC</div>
             <p className="text-sm text-gray-400">Virtual Class for Zoom</p>
-          </div>
+          </div>app
         </div>
 
 
