@@ -47,14 +47,10 @@ const Navbar = () => {
         >
           Home
         </Link>
-<<<<<<< HEAD
         <Link
           to="/about"
           className="text-gray-700 hover:text-[#00cdc4] transition-colors"
         >
-=======
-        <Link to="/aboutus" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
->>>>>>> 704dddb35c9b1ee402c27260ef2ce3dcdf726d94
           About
         </Link>
         <Link
@@ -63,14 +59,10 @@ const Navbar = () => {
         >
           Courses
         </Link>
-<<<<<<< HEAD
         <Link
           to="/contact"
           className="text-gray-700 hover:text-[#00cdc4] transition-colors"
         >
-=======
-        <Link to="/contactus" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
->>>>>>> 704dddb35c9b1ee402c27260ef2ce3dcdf726d94
           Contact
         </Link>
         <Link
