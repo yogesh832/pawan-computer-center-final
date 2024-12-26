@@ -43,7 +43,7 @@ const Courses = () => {
   ];
 
   return (
-    <div className="bg-gray-100 p-12 w-full">
+    <div className=" p-12 w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-extrabold text-gray-900 text-center mb-10">
           Choose Your Course Duration
@@ -55,7 +55,7 @@ const Courses = () => {
               key={index}
               className="bg-white shadow-md rounded-lg p-6 hover:shadow-xl transition duration-300 ease-in-out"
             >
-              <h3 className="text-xl font-semibold text-blue-600 mb-4 text-center">
+              <h3 className="text-xl font-semibold text-[#FF7352] mb-4 text-center">
                 {course.duration}
               </h3>
               <ul className="text-gray-700 mb-6 space-y-2">
@@ -82,7 +82,7 @@ const Courses = () => {
               <div className="text-center">
                 <a
                   href={course.link}
-                  className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
+                  className="bg-[#06b5a6] text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition duration-300"
                 >
                   Check Out
                 </a>

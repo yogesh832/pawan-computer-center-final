@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import axios from "axios";
-// import contactimg from "../../assets/images/contactimg.png";
+import contactimg from "../../assets/contactimg.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 function Contact() {
-  // Define state variables for form fields
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState("");
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -23,8 +20,7 @@ function Contact() {
 
       if (response.status === 200) {
         toast.success("Email sent successfully!");
-        // setStatus('Email sent successfully!');
-        setName(""); // Clear form fields
+        setName("");
         setEmail("");
         setMessage("");
       } else {
@@ -37,27 +33,32 @@ function Contact() {
   };
 
   return (
-    <div className="container mx-auto p-4 pt-6 md:p-6 lg:p-12 xl:p-24">
+    <div className="container mx-auto p-6 pt-10 md:p-10 lg:p-16 xl:p-24">
       <div className="text-center mb-12">
-        <h1 className="text-3xl font-bold mb-4">CONTACT US</h1>
+        <h1 className="text-4xl font-extrabold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-blue-500 to-purple-500">
+          CONTACT US
+        </h1>
         <p className="text-lg text-gray-600">
           LET’S CONNECT: WE’RE HERE TO HELP, AND WE’D LOVE TO HEAR FROM YOU!
-          WHETHER SOCIAL MEDIA.
+          WHETHER IT’S ABOUT A QUERY OR COLLABORATION.
         </p>
       </div>
-      <div className="flex flex-wrap -mx-4">
-        <div className="w-full md:w-1/2 xl:w-1/2 p-4">
+      <div className="flex flex-wrap -mx-4 items-center">
+        <div className="w-full md:w-1/2 p-4">
           <img
-            // src={contactimg}
-            alt="contactimg"
-            className="w-full h-full object-cover"
+            src={contactimg}
+            alt="Contact"
+            className="w-full h-auto rounded-lg shadow-md hover:shadow-xl transform hover:scale-105 transition-transform duration-300"
           />
         </div>
-        <div className="w-full md:w-1/2 xl:w-1/2 p-4">
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
+        <div className="w-full md:w-1/2 p-4">
+          <form
+            onSubmit={handleSubmit}
+            className="bg-white rounded-lg shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300"
+          >
+            <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-800 text-sm font-bold mb-2"
                 htmlFor="name"
               >
                 Name
@@ -67,14 +68,14 @@ function Contact() {
                 id="name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter your Name..."
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter your name..."
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-800 text-sm font-bold mb-2"
                 htmlFor="email"
               >
                 Email address
@@ -84,36 +85,35 @@ function Contact() {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Enter you Email (abc@gmail.com)"
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter your email (e.g., abc@gmail.com)"
                 required
               />
             </div>
-            <div className="mb-4">
+            <div className="mb-6">
               <label
-                className="block text-gray-700 text-sm font-bold mb-2"
+                className="block text-gray-800 text-sm font-bold mb-2"
                 htmlFor="message"
               >
                 Message
               </label>
               <textarea
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 id="message"
                 rows="4"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
-                placeholder="Enter you message..."
+                className="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Enter your message..."
                 required
-              />
+              ></textarea>
             </div>
             <button
               type="submit"
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+              className="w-full py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white font-bold rounded-lg shadow-md hover:shadow-lg transform hover:scale-105 transition-transform duration-300"
             >
               Send
             </button>
           </form>
-          {status && <p className="mt-4 text-center text-gray-700">{status}</p>}
         </div>
       </div>
       <ToastContainer />

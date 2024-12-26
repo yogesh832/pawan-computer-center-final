@@ -12,7 +12,7 @@ import MiniAboutUs from "../../components/landingComponents/miniAboutUs";
 const LandingPage = () =>{
     return(
         <div className="bg-gray-50">
-            <Navbar />
+            
             <Hero />
             <OurSuccess />
             <Features />
@@ -20,7 +20,7 @@ const LandingPage = () =>{
             <Testimonial />
             <ClassroomFeature />
             <MiniAboutUs />
-            <Footer />
+            
         </div>
     )
 }
