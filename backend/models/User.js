@@ -7,7 +7,6 @@ const userSchema = new mongoose.Schema({
   dob: { type: String },
   email: {
     type: String,
-    // required: true,  // Required
     match: [/^\S+@\S+\.\S+$/, "Please use a valid email address"], // Email validation
   },
   state: { type: String },
@@ -26,18 +25,9 @@ const userSchema = new mongoose.Schema({
   maritalstatus: { type: String }, // Optional field
   address: { type: String },
   presentaddress: { type: String },
-  photo: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "uploads.files",
-  },
-  signature: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "uploads.files",
-  },
-  marksheet: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "uploads.files",
-  },
+  photo: { type: String }, // URL of the uploaded photo
+  signature: { type: String }, // URL of the uploaded signature
+  marksheet: { type: String }, // URL of the uploaded marksheet
   registrationNumber: { type: String },
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

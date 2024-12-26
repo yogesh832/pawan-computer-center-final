@@ -10,7 +10,6 @@ const port = 8000;
 
 app.use(express.json());
 const userRouter = require("./router/userRouter");
-
 app.use(cors());
 app.use("/api/v1", userRouter);
 
