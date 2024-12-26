@@ -30,27 +30,45 @@ const Navbar = () => {
   return (
     <nav className="bg-[#f3f2f8] px-5 flex justify-between items-center py-4 relative">
       {/* Logo Section */}
-      <div>
-        <Link to="/">
+      <div className="flex items-center">
+        <Link to="/" className="flex items-center">
           <img src={logo} alt="Logo" className="w-24" />
+          <span className=" text-lg font-semibold text-gray-800">
+            PAWAN COMPUTER CENTER
+          </span>
         </Link>
       </div>
 
       {/* Desktop Menu */}
       <div className="hidden md:flex space-x-6">
-        <Link to="/" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link
+          to="/"
+          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+        >
           Home
         </Link>
-        <Link to="/aboutus" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link
+          to="/about"
+          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+        >
           About
         </Link>
-        <Link to="/course" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link
+          to="/course"
+          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+        >
           Courses
         </Link>
-        <Link to="/contactus" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link
+          to="/contact"
+          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+        >
           Contact
         </Link>
-        <Link to="/gallery" className="text-gray-700 hover:text-[#00cdc4] transition-colors">
+        <Link
+          to="/gallery"
+          className="text-gray-700 hover:text-[#00cdc4] transition-colors"
+        >
           Gallery
         </Link>
       </div>
@@ -142,7 +160,7 @@ const Navbar = () => {
           >
             Gallery
           </Link>
-<hr className="w-full border-gray-300" />
+          <hr className="w-full border-gray-300" />
           <Link to="/signup">
             <button
               className="w-32 px-4 py-2 bg-[#00cdc4] text-white text-center rounded-3xl text-sm transition duration-300 ease-in-out"
