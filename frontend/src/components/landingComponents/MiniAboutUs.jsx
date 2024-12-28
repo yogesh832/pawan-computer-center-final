@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { IoIosArrowRoundForward } from "react-icons/io";
 
 const MiniAboutUs = () => {
   return (
@@ -10,13 +11,13 @@ const MiniAboutUs = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 order-last lg:order-first">
             <div className="pt-24 lg:justify-center sm:justify-end flex">
               <img
-                className="rounded-xl object-cover shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
+                className="rounded-xl object-cover shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 w-full h-auto"
                 src="https://pagedone.io/asset/uploads/1717741205.png"
                 alt="About Us"
               />
             </div>
             <img
-              className="rounded-xl object-cover shadow-lg transition-transform duration-300 ease-in-out hover:scale-105"
+              className="rounded-xl object-cover shadow-lg transition-transform duration-300 ease-in-out hover:scale-105 w-full h-auto"
               src="https://pagedone.io/asset/uploads/1717741215.png"
               alt="About Us"
             />
@@ -26,10 +27,11 @@ const MiniAboutUs = () => {
           <div className="flex flex-col gap-10 lg:items-start items-center text-center lg:text-left">
             <div className="flex flex-col gap-8">
               <div className="flex flex-col gap-4">
-                <h2 className="text-gray-900 text-4xl font-bold leading-tight">
-                  Empowering Each Other to Succeed
+                <h2 className="text-[#00cdc4] text-3xl sm:text-4xl font-bold leading-tight">
+                  Empowering
+                  <span className="text-[#FF7352]"> Each Other to Succeed</span>
                 </h2>
-                <p className="text-gray-600 text-base font-light leading-relaxed">
+                <p className="text-gray-600 leading-relaxed text-lg sm:text-2xl">
                   Every project we've undertaken has been a collaborative
                   effort, where every person involved has left their mark.
                   Together, we've not only constructed buildings but also built
@@ -38,26 +40,32 @@ const MiniAboutUs = () => {
               </div>
 
               {/* Stats Section */}
-              <div className="flex justify-center lg:justify-start gap-12">
-                <div className="flex flex-col items-center lg:items-start">
-                  <h3 className="text-gray-900 text-4xl font-bold">33+</h3>
-                  <p className="text-gray-500 text-sm">Years of Experience</p>
+              <div className="flex flex-wrap justify-center lg:justify-start gap-12 lg:gap-16">
+                <div className="text-center">
+                  <p className="text-2xl sm:text-6xl text-[#00cdc4]">33+</p>
+                  <p className="text-black text-xl sm:text-2xl">Years of Experience</p>
                 </div>
-                <div className="flex flex-col items-center lg:items-start">
-                  <h3 className="text-gray-900 text-4xl font-bold">125+</h3>
-                  <p className="text-gray-500 text-sm">Successful Projects</p>
+                <div className="text-center">
+                  <p className="text-2xl sm:text-6xl text-[#00cdc4]">125+</p>
+                  <p className="text-black text-xl sm:text-2xl">Successful Projects</p>
                 </div>
-                <div className="flex flex-col items-center lg:items-start">
-                  <h3 className="text-gray-900 text-4xl font-bold">52+</h3>
-                  <p className="text-gray-500 text-sm">Happy Clients</p>
+                <div className="text-center">
+                  <p className="text-2xl sm:text-6xl text-[#00cdc4]">52+</p>
+                  <p className="text-black text-xl sm:text-2xl">Main Questions</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-2xl sm:text-6xl text-[#00cdc4]">52+</p>
+                  <p className="text-black text-xl sm:text-2xl">Happy Clients</p>
                 </div>
               </div>
             </div>
 
             {/* Read More Button */}
-           <Link to={"miniaboutus"}> <button className="w-fit px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg shadow-md transition-all duration-300 ease-in-out">
-              Read More
-            </button>
+            <Link to={"about"}>
+              <button className="mt-4 flex items-center gap-2 px-6 py-3 bg-[#00cdc4] text-xl text-white rounded-full hover:bg-[#00b5a5] transition-all duration-300 ease-in-out">
+                Read More
+                <IoIosArrowRoundForward className="text-2xl" />
+              </button>
             </Link>
           </div>
         </div>

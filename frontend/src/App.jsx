@@ -1,26 +1,28 @@
 import React from "react";
-import {Routes, Route } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import Layout from "../Layout.jsx";
 import LandingPage from "./pages/landingPage/LandingPage";
-import Login from "./components/account/Login.jsx";
-import SignUp from "./components/account/SignUp.jsx";
-import AboutUs from "./pages/aboutUs/aboutUs.jsx";
-import Contact from "./pages/contact/ContactUs.jsx";
-import Courses from "./components/landingComponents/Courses.jsx";
-import Gallery from "./pages/gallery/Gallery.jsx";
-const App = () =>{
-  return (
-    <div>
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/aboutus" element={<AboutUs />} />
-        <Route path="/contactus" element={<Contact />} />
-        <Route path="/course" element={<Courses />} />
-        <Route path="/gallery" element={<Gallery />} />
-      </Routes>
-    </div>
-  )
-}
+import Login from "./components/account/Login";
+import SignUp from "./components/account/SignUp";
+import AboutUs from "./pages/aboutUs/AboutUs";
+import Contact from "./pages/contact/ContactUs";
+import Courses from "./pages/courses/Course";
+import Gallery from "./pages/gallery/Gallery";
 
-export default App;
+export const App = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />, 
+    children: [
+      { index: true, element: <LandingPage /> }, 
+      { path: "about", element: <AboutUs /> },
+      { path: "contact", element: <Contact /> },
+      { path: "course", element: <Courses /> },
+      { path: "gallery", element: <Gallery /> },
+      { path: "login", element: <Login /> }, 
+      { path: "signup", element: <SignUp /> },
+    ],
+  },
+]);
+
+

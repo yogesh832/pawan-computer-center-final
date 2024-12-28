@@ -67,15 +67,15 @@ const Testimonial = () => {
             What They Say?
           </h2>
 
-          <p className="text-gray-600 mb-4 text-lg">
+          <p className="text-gray-600 mb-4 text-2xl">
             TOTC has got more than 100k positive ratings from our users around
             the world.
           </p>
-          <p className="text-gray-600 mb-6 text-lg">
+          <p className="text-gray-600 mb-6 text-2xl">
             Some of the students and teachers were greatly helped by the
             Skilline.
           </p>
-          <p className="text-gray-600 mb-6 text-lg">
+          <p className="text-gray-600 mb-6 text-2xl">
             Are you too? Please give your assessment
           </p>
 
