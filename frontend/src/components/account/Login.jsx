@@ -52,7 +52,7 @@ const Login = () => {
 
       // Use axios instead of fetch
       const response = await axios.post(
-        "http://localhost:5000/login", // Backend API URL
+        "http://localhost:8000/api/v1/login", // Backend API URL
         loginInfo
       );
 
@@ -71,7 +71,7 @@ const Login = () => {
 
       // Check if the registration number is provided
       if (loginInfo.registration) {
-        navigate(`/dashboard/student/${loginInfo.registration}`, {
+        navigate(`/student/${loginInfo.registration}`, {
           replace: true,
         });
       } else {
