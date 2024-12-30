@@ -52,7 +52,7 @@ const Login = () => {
 
       // Use axios instead of fetch
       const response = await axios.post(
-        "http://localhost:5000/login", // Backend API URL
+        "http://localhost:8000/api/v1/login", // Backend API URL
         loginInfo
       );
 
@@ -71,7 +71,7 @@ const Login = () => {
 
       // Check if the registration number is provided
       if (loginInfo.registration) {
-        navigate(`/dashboard/student/${loginInfo.registration}`, {
+        navigate(`/student/${loginInfo.registration}`, {
           replace: true,
         });
       } else {
@@ -85,7 +85,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen">
       <h1 className="text-center text-5xl font-bold mt-10 mb-5">Login Now!</h1>
       <div className="flex flex-col md:flex-row items-center justify-center min-h-screen p-6">
         <div className="w-full md:w-1/2 p-6">
@@ -155,7 +155,7 @@ const Login = () => {
         </form>
       </div>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 

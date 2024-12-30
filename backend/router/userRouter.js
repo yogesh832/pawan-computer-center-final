@@ -7,7 +7,7 @@ const { adminAuth } = require("../controller/userController/adminAuth.js");
 
 
  router.post("/register",register)
- router.get("/login",login)
+ router.post("/login",login)
  router.post("/send-email",sendEmail)
  router.post("/admin/login", adminAuth)
  
