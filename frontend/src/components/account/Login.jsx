@@ -85,7 +85,7 @@ const Login = () => {
   };
 
   return (
-    <>
+    <div className="min-h-screen">
       <h1 className="text-center text-5xl font-bold mt-10 mb-5">Login Now!</h1>
       <div className="flex flex-col md:flex-row items-center justify-center min-h-screen p-6">
         <div className="w-full md:w-1/2 p-6">
@@ -155,7 +155,7 @@ const Login = () => {
         </form>
       </div>
       <ToastContainer />
-    </>
+    </div>
   );
 };
 
