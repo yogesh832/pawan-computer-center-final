@@ -56,14 +56,14 @@ const Sidebar = () => {
           {showStudentLinks && (
             <div className="pl-6 mt-2 space-y-1">
               <Link
-                to="/dashboard/AddStudent"
+                to="/dashboard/addstudents"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />
                 Add Student
               </Link>
               <Link
-                to="/dashboard/SeeAllStudents"
+                to="/dashboard/seeallstudents"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />

@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import BackBtn from "../BackBtnForAll/BackBtn";
-// import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Loading from "../../../components/loading/Loading";
 
+const EditStudent = () => {
+  const { registrationNumber } = useParams();
 
-const AddStudent = () =>{
-    
+  console.log("Registration Number:", registrationNumber);
+
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -24,12 +26,8 @@ const AddStudent = () =>{
     gender: "",
     category: "",
     religion: "",
-    maritalstatus: "",
     address: "",
     presentaddress: "",
-    photo: null,
-    signature: null,
-    marksheet: null,
   });
 
   const [error, setError] = useState("");
@@ -38,77 +36,10 @@ const AddStudent = () =>{
 
   const courseOptions = {
     "": [],
-    "1 Month Certificate Course": [
-      "CERTIFICATE IN FUNDAMENTAL(RV01001)",
-      "CERTIFICATE IN MS EXCEL(RV01003)",
-      "CERTIFICATE IN MS POWER POINT(RV01004)",
-      "CERTIFICATE IN MS WORD(RV01002)",
-    ],
-    "3 Months Certificate Course": [
+    8: ["CERTIFICATE IN FUNDAMENTAL(RV01001)"],
+    9: [
       "Advanced Level Graphic Design(RV03039)",
-      "Advanced Level Video Production(RV03040)",
-      "CERTIFICATE IN ADOBE IN-DESIGN(RV03023)",
-      "CERTIFICATE IN ADOBE PREMIER(RV03012)",
-      "CERTIFICATE IN AJAX(RV03026)",
-      "CERTIFICATE IN ASP.NET, ADO.NET(RV03019)",
-      "CERTIFICATE IN AUTOCAD [2D & 3D](RV03032)",
-      "CERTIFICATE IN C(RV03018)",
-      "CERTIFICATE IN C ++(RV03020)",
-      "CERTIFICATE IN COMPUTER BASIC(RV03003)",
-      "CERTIFICATE IN CORE JAVA(RV03033)",
-      "CERTIFICATE IN COREL DRAW(RV03011)",
-      "CERTIFICATE IN DOTNET PROGRAMMING(RV03038)",
-      "CERTIFICATE IN DREAMWEAVER(RV03017)",
-      "CERTIFICATE IN ENGLISH & REGIONAL LANGUAGE $ TYPING(RV03036)",
-      "CERTIFICATE IN EXCEL(RV03041)",
       "CERTIFICATE IN HINDI TYPING(RV03006)",
-      "CERTIFICATE IN HTML(RV03027)",
-      "CERTIFICATE IN ILLUSTRATOR(RV03024)",
-      "CERTIFICATE IN SERVLET, JSP, JDBC(RV03029)",
-      "CERTIFICATE IN SOUND FORGE(RV03015)",
-      "CERTIFICATE IN SPOKEN ENGLISH(RV03004)",
-      "CERTIFICATE IN VISUAL BASIC(RV03028)",
-      "CERTIFICATE COURSE IN REVIT ARCHITECTURE(RVV03008)",
-      "CERTIFICATE IN 3D STUDIO MAX(RV03013)",
-      "CERTIFICATE IN AFTER EFFECTS(RV03014)",
-      "DIPLOMA IN COMPUTER APPLICATION(RV03001)",
-    ],
-    "6 Months Certificate Course": [
-      "DIPLOMA IN MOBILE REPAIRING & SOFTWARE INSTALLATION(RVV06021)",
-      "CERTIFICATE IN COMPUTER BASIC AND TALLY(RV06016)",
-      "CERTIFICATE IN ENGLISH AND HINDI TYPING(RV06018)",
-      "DIPLOMA IN BASIC MULTIMEDIA(RV06011)",
-      "DIPLOMA IN COMPUTER APPLICATION ACCOUNTING(RV06009)",
-      "DIPLOMA IN COMPUTER PROGRAMMING(RV06007)",
-      "DIPLOMA IN DESK TOP PUBLISHING(RV06003)",
-      "CERTIFICATE IN COMPUTER APPLICATION(RV06017)",
-      "CERTIFICATE IN DECORATIVE PAINTINGS(RVV06045)",
-      "Certificate in Digital Marketing(RV06020)",
-      "CERTIFICATE IN GRAPHIC DESIGNING(RV06014)",
-      "TO WEAR WITH ANGELA WOLF (RVV06006)",
-      "DIPLOMA IN WEB TECHNOLOGY(RV06006)",
-    ],
-    "12 Months Advance Diploma Course": [
-      "ADVANCE DIPLOMA IN COMPUTER APPLICATION(RV18001)",
-      "Master Diploma in Computer information(EV18002)",
-    ],
-    "12 Months Diploma Course": [
-      "Advance Diploma in Barbering(RVV24004)",
-      "ADVANCE DIPLOMA IN COMPUTER HARDWARE & NETWORKING ENGINEERING(RV24003)",
-      "ADVANCE DIPLOMA IN FINANCIAL ACCOUNTING(RV24006)",
-      "ADVANCE DIPLOMA IN INFORMATION TECHNOLOGY(RV24004)",
-      "ADVANCE DIPLOMA IN NURSERY TEACHER TRAINNING(RVV24001)",
-      "Diploma in Computer Application (RV24005)",
-      "UNDER GRADUATE DIPLOMA IN FASHION DESIGNING(RVV24006)",
-      "POST GRADUATE DIPLOMA IN INFORMATION TECHNOLOGY(RV24001)",
-    ],
-    "12 Months Health Care Course": [
-      "Health Care",
-      "Health Care",
-    ],
-    "24 Months Health Care Course": [
-      "Health Care",
-      "Health Care",
     ],
   };
 
@@ -146,6 +77,30 @@ const AddStudent = () =>{
 
   const categories = ["General", "OBC", "SC", "ST", "EWS"];
   const maritalStatuses = ["Single", "Married", "Divorced", "Widowed"];
+  const genders = ["Male", "Female", "Other"];
+
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `http://localhost:8000/api/v1/student/one-student/${registrationNumber}`
+        );
+        console.log("Fetched data:", response.data);
+        setFormData(response.data);
+        setSelectedCourse(response.data.course);
+      } catch (error) {
+        console.error("Error fetching student data:", error.response?.data);
+        setError(error.response?.data?.message || "Failed to fetch student data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (registrationNumber) {
+      fetchStudentData();
+    }
+  }, [registrationNumber]);
 
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
@@ -159,95 +114,41 @@ const AddStudent = () =>{
       setSelectedCourse(value);
       setFormData({ ...formData, course: value, courseOption: "" });
     }
-      const file = e.target.files[0]; // Get the uploaded file
-  const maxFileSize = 1 * 1024 * 1024; // 1MB size limit
-  const fieldName = e.target.name; // Identify which field triggered the change
-
-  if (!file) return; // No file selected, exit early
-
-  if (file.size > maxFileSize) {
-    alert(`${fieldName} file size must be less than 1MB.`);
-    e.target.value = ""; // Clear the invalid file
-    return;
-  }
-
- 
-
-  // Handle the valid file (e.g., store in state or upload directly)
-  console.log(`${fieldName} is valid. File size: ${file.size / 1024 / 1024} MB`);
-
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
 
-    // Add additional validation logic here if needed
-
-    setLoading(true);
+    console.log("Form data to submit:", formData);
 
     try {
-      const data = new FormData();
-      for (const key in formData) {
-        if (formData[key]) {
-          data.append(key, formData[key]);
-        }
-      }
-
-      console.log("Submitting form data:", data);
-
-      const response = await axios.post(
-        "http://localhost:8000/api/v1/student/add-student",
-        data,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
+      const response = await axios.put(
+        `http://localhost:8000/api/v1/student/edit-student/${registrationNumber}`,
+        formData
       );
-
-      console.log("Response from server:", response.data);
-
-      setFormData({
-        firstname: "",
-        lastname: "",
-        dob: "",
-        state: "",
-        district: "",
-        course: "",
-        courseOption: "",
-        mothername: "",
-        qualification: "",
-        contactno: "",
-        guardiancontact: "",
-        adhar: "",
-        gender: "",
-        category: "",
-        religion: "",
-        maritalstatus: "",
-        address: "",
-        presentaddress: "",
-        photo: null,
-        signature: null,
-        marksheet: null,
-      });
-      setError("");
+      console.log("Update successful:", response.data);
+      alert("Student details updated successfully!");
     } catch (error) {
-      setError("Failed to add student. Please try again.");
-      console.error("Axios Error:", error.response?.data || error.message);
-    } finally {
-      setLoading(false);
+      console.error("Error updating student data:", error.response?.data);
+      setError(error.response?.data?.message || "Error updating student data");
     }
   };
 
+  if (loading)
+    return (
+      <p>
+        <Loading />
+      </p>
+    );
+  if (error) return <p>{error}</p>;
+
   return (
     <div className="container mx-auto p-4">
-      {/* <Link to="/dashboard"> 
-      <BackBtn />
-      </Link> */}
-      <h1 className="text-2xl font-semibold mb-4">Add Student</h1>
+      <h1 className="text-2xl font-semibold mb-4">Edit Student</h1>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <form onSubmit={handleSubmit}>
           <div className="flex flex-wrap">
+            {/* First Name */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="firstname"
@@ -265,7 +166,8 @@ const AddStudent = () =>{
                 required
               />
             </div>
-
+            
+            {/* last Name */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="lastname"
@@ -284,6 +186,7 @@ const AddStudent = () =>{
               />
             </div>
 
+            {/* date of birth */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="dob"
@@ -302,22 +205,7 @@ const AddStudent = () =>{
               />
             </div>
 
-            <div className="w-full md:w-1/2 px-4 mb-4">
-              <label
-                htmlFor="firstname"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-              />
-            </div>
-
+            {/* state  */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="state"
@@ -342,6 +230,7 @@ const AddStudent = () =>{
               </select>
             </div>
 
+            {/* district */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="district"
@@ -356,11 +245,11 @@ const AddStudent = () =>{
                 value={formData.district}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
 
-            <div className="w-full md:w-1/2 px-4 mb-4">
+             {/* course */}
+             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="course"
                 className="block text-sm font-medium text-gray-700"
@@ -376,33 +265,13 @@ const AddStudent = () =>{
                 required
               >
                 <option value="">Select Course</option>
-                <option value="1 Month Certificate Course">
-                  1 Month Certificate Course
-                </option>
-                <option value="3 Months Certificate Course">
-                  3 Months Certificate Course
-                </option>
-                <option value="6 Months Certificate Course">
-                  6 Months Certificate Course
-                </option>
-                <option value="12 Months Diploma Course">
-                12 Months Diploma Course
-                </option>
-                <option value="12 Months Advance Diploma Course">
-                12 Months Advance Diploma Course
-                </option>
-                {/* <option value="24 Months Diploma Course">
-                24 Months Diploma Course
-                </option> */}
-                <option value="12 Months Health Care Course">
-                12 Months Health Care Course
-                </option>
-                <option value="24 Months Health Care Course">
-                24 Months Health Care Course
-                </option>
+                <option value="8">1-Month Certificate Course</option>
+                <option value="9">3-Months Certificate Course</option>
+                {/* Add more course options */}
               </select>
             </div>
 
+            {/* course Option */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="courseOption"
@@ -428,12 +297,13 @@ const AddStudent = () =>{
               </select>
             </div>
 
+            {/* mother Name */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="mothername"
                 className="block text-sm font-medium text-gray-700"
               >
-                Mother's Name:
+                Mother Name:
               </label>
               <input
                 type="text"
@@ -442,15 +312,16 @@ const AddStudent = () =>{
                 value={formData.mothername}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
+
+            {/* father Name */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="fathername"
                 className="block text-sm font-medium text-gray-700"
               >
-                Father's Name:
+                Father Name:
               </label>
               <input
                 type="text"
@@ -459,10 +330,10 @@ const AddStudent = () =>{
                 value={formData.fathername}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
 
+            {/* qualification */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="qualification"
@@ -477,19 +348,19 @@ const AddStudent = () =>{
                 value={formData.qualification}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
 
+            {/* contact No */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="contactno"
                 className="block text-sm font-medium text-gray-700"
               >
-                Contact Number:
+                Contact No:
               </label>
               <input
-                type="tel"
+                type="text"
                 id="contactno"
                 name="contactno"
                 value={formData.contactno}
@@ -499,30 +370,31 @@ const AddStudent = () =>{
               />
             </div>
 
+            {/* guardian Contact */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="guardiancontact"
                 className="block text-sm font-medium text-gray-700"
               >
-                Guardian's Contact:
+                Guardian Contact:
               </label>
               <input
-                type="tel"
+                type="text"
                 id="guardiancontact"
                 name="guardiancontact"
                 value={formData.guardiancontact}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
 
+            {/* aadhar */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="adhar"
                 className="block text-sm font-medium text-gray-700"
               >
-                Aadhaar Number:
+                Aadhar:
               </label>
               <input
                 type="text"
@@ -531,10 +403,10 @@ const AddStudent = () =>{
                 value={formData.adhar}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
 
+            {/* gender */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="gender"
@@ -548,15 +420,17 @@ const AddStudent = () =>{
                 value={formData.gender}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               >
                 <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
+                {genders.map((gender) => (
+                  <option key={gender} value={gender}>
+                    {gender}
+                  </option>
+                ))}
               </select>
             </div>
 
+            {/* category */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="category"
@@ -570,7 +444,6 @@ const AddStudent = () =>{
                 value={formData.category}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               >
                 <option value="">Select Category</option>
                 {categories.map((category) => (
@@ -581,6 +454,7 @@ const AddStudent = () =>{
               </select>
             </div>
 
+            {/* religion */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="religion"
@@ -595,11 +469,11 @@ const AddStudent = () =>{
                 value={formData.religion}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               />
             </div>
 
-            <div className="w-full md:w-1/2 px-4 mb-4">
+            {/* marital Status */}
+            {/* <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="maritalstatus"
                 className="block text-sm font-medium text-gray-700"
@@ -612,7 +486,6 @@ const AddStudent = () =>{
                 value={formData.maritalstatus}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
               >
                 <option value="">Select Marital Status</option>
                 {maritalStatuses.map((status) => (
@@ -621,14 +494,15 @@ const AddStudent = () =>{
                   </option>
                 ))}
               </select>
-            </div>
+            </div> */}
 
-            <div className="w-full md:w-1/2 px-4 mb-4">
+             {/* address */}
+             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                Permanent Address:
+                Address:
               </label>
               <textarea
                 id="address"
@@ -636,10 +510,10 @@ const AddStudent = () =>{
                 value={formData.address}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              ></textarea>
+              />
             </div>
 
+            {/* present Address */}
             <div className="w-full md:w-1/2 px-4 mb-4">
               <label
                 htmlFor="presentaddress"
@@ -653,81 +527,94 @@ const AddStudent = () =>{
                 value={formData.presentaddress}
                 onChange={handleChange}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-                required
-              ></textarea>
+              />
             </div>
 
-
-
-
-{/* img upload */}
-            <div className="w-full md:w-1/2 px-4 mb-4">
-            <p className="text-blue-500 text-sm"><span className="text-red-500">NOTE:</span>Images must be less then 1 MB each</p>
-      <label htmlFor="photo" className="block text-sm font-medium text-gray-700">
-        Upload Photo:
-      </label>
-      <input
-        type="file"
-        id="photo"
-        name="photo"
-        onChange={handleChange}
-        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-        accept="image/*"
-      />
-    </div>
-
-    <div className="w-full md:w-1/2 px-4 mb-4">
-      <label
-        htmlFor="signature"
-        className="block text-sm font-medium text-gray-700"
-      >
-        Upload Signature:
-      </label>
-      <input
-        type="file"
-        id="signature"
-        name="signature"
-        onChange={handleChange}
-        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-        accept="image/*"
-      />
-    </div>
-
-    <div className="w-full md:w-1/2 px-4 mb-4">
-      <label
-        htmlFor="marksheet"
-        className="block text-sm font-medium text-gray-700"
-      >
-        Upload Marksheet:
-      </label>
-      <input
-        type="file"
-        id="marksheet"
-        name="marksheet"
-        onChange={handleChange}
-        className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2"
-        accept="image/*,application/pdf"
-      />
-    </div>
-
-
-
-
-            <div className="w-full px-4">
-              <button
-                type="submit"
-                className="bg-blue-500 text-white font-bold py-2 px-4 rounded"
-                disabled={loading}
+              {/* photo */}
+              {/* <div className="w-full md:w-1/2 px-4 mb-4">
+              <label
+                htmlFor="photo"
+                className="block text-sm font-medium text-gray-700"
               >
-                {loading ? "Adding..." : "Add Student"}
-              </button>
-            </div>
-          </div>
-        </form>
+                Photo:
+              </label>
+              <input
+                type="file"
+                id="photo"
+                name="photo"
+                onChange={handleChange}
+                className="mt-1 block w-full"
+              />
+              {formData.photo && (
+                <img
+                  src={
+                    formData.photo instanceof File
+                      ? URL.createObjectURL(formData.photo)
+                      : null
+                  }
+                  alt="Preview"
+                  className="mt-2 w-32 h-32 object-cover"
+                />
+              )}
+            </div> */}
 
-        {error && <p className="text-red-500 mt-4">{error}</p>}
+            {/* signature */}
+            {/* <div className="w-full md:w-1/2 px-4 mb-4">
+              <label
+                htmlFor="signature"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Signature:
+              </label>
+              <input
+                type="file"
+                id="signature"
+                name="signature"
+                onChange={handleChange}
+                className="mt-1 block w-full"
+              />
+              {formData.signature && (
+                <img
+                  src={
+                    formData.signature instanceof File
+                      ? URL.createObjectURL(formData.signature)
+                      : null
+                  }
+                  alt="Preview"
+                  className="mt-2 w-32 h-32 object-cover"
+                />
+              )}
+            </div> */}
+
+            {/* marksheet */}
+            {/* <div className="w-full md:w-1/2 px-4 mb-4">
+              <label
+                htmlFor="marksheet"
+                className="block text-sm font-medium text-gray-700"
+              >
+                Marksheet:
+              </label>
+              <input
+                type="file"
+                id="marksheet"
+                name="marksheet"
+                onChange={handleChange}
+                className="mt-1 block w-full"
+              />
+            </div> */}
+
+            {/* Additional form fields */}
+          </div>
+          <button
+            type="submit"
+            className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     </div>
   );
-}
-export default AddStudent;
+};
+
+export default EditStudent;

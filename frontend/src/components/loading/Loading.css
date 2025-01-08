@@ -1,0 +1,89 @@
+.loader21 {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    margin-top: -50vh;
+  }
+  
+  .loader21 span {
+    position: absolute;
+    top: 0px;
+    width: 8px;
+    height: 20px;
+    background-color: #00CDC5;
+    border-radius: 6px / 12px;
+    transform-origin: 4px 44px;
+    animation: loader21-animation linear 1s infinite;
+  }
+  
+  .loader21 span:nth-child(1) {
+    transform: rotate(0deg);
+    animation-delay: -0.9s;
+  }
+  
+  .loader21 span:nth-child(2) {
+    transform: rotate(30deg);
+    animation-delay: -0.8s;
+  }
+  
+  .loader21 span:nth-child(3) {
+    transform: rotate(60deg);
+    animation-delay: -0.75s;
+  }
+  
+  .loader21 span:nth-child(4) {
+    transform: rotate(90deg);
+    animation-delay: -0.6s;
+  }
+  
+  .loader21 span:nth-child(5) {
+    transform: rotate(120deg);
+    animation-delay: -0.5s;
+  }
+  
+  .loader21 span:nth-child(6) {
+    transform: rotate(150deg);
+    animation-delay: -0.5s;
+  }
+  
+  .loader21 span:nth-child(7) {
+    transform: rotate(180deg);
+    animation-delay: -0.4s;
+  }
+  
+  .loader21 span:nth-child(8) {
+    transform: rotate(210deg);
+    animation-delay: -0.3s;
+  }
+  
+  .loader21 span:nth-child(9) {
+    transform: rotate(240deg);
+    animation-delay: -0.25s;
+  }
+  
+  .loader21 span:nth-child(10) {
+    transform: rotate(270deg);
+    animation-delay: -0.1s;
+  }
+  
+  .loader21 span:nth-child(11) {
+    transform: rotate(300deg);
+    animation-delay: -0.08s;
+  }
+  
+  .loader21 span:nth-child(12) {
+    transform: rotate(330deg);
+    animation-delay: 0s;
+  }
+  
+  @keyframes loader21-animation {
+    0% {
+      opacity: 1;
+    }
+  
+    100% {
+      opacity: 0;
+    }
+  }
+  

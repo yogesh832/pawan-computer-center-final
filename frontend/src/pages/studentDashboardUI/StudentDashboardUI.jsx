@@ -4,6 +4,7 @@ import { FaEye } from "react-icons/fa";
 import { CiEdit } from "react-icons/ci";
 import ProgressBar from "./ProgressBar.jsx";
 import { useParams } from "react-router-dom";
+import Loading from "../../components/loading/Loading.jsx";
 
 const StudentDashboardUI = () => {
   const totalDays = 100; // Total number of days in the course
@@ -44,7 +45,7 @@ const StudentDashboardUI = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div><Loading /></div>;
   }
 
   if (error) {

@@ -89,7 +89,7 @@ const AdminPanel = () => {
             <div className="text-lg font-semibold text-white">0 Students Certificate</div>
             <HiMiniPencil className="text-3xl text-white" />
           </div>
-          <Link to="/dashboard/SeeAllStudent">
+          <Link to="/dashboard/seeallstudent">
             <button className="mt-4 bg-blue-800 text-white py-2 px-4 rounded-full hover:bg-blue-900 transition-colors duration-300">
               More Info
             </button>
