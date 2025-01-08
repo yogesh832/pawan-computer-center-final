@@ -12,7 +12,13 @@ import NewUser from "./pages/account/NewUser/NewUser.jsx";
 import StudentDashboardUI from "./pages/StudentDashboardUI/StudentDashboardUI.jsx";
 import AdminLoginUI from "./pages/account/Admin/AdminLoginUI.jsx";
 import DashboardUI from "./pages/adminDashboard/dashboardUI/DashboardUI.jsx";
-
+import CenterDocument from "./pages/adminDashboard/centerSection/CenterDocument.jsx";
+import ViewCertificate from "./pages/adminDashboard/certificateSection/ViewCertificate.jsx";
+import AddMarks from "./pages/adminDashboard/offlineExamination/AddMarks.jsx";
+import AddStudentsMarks from "./pages/adminDashboard/offlineExamination/AddStudentMarks.jsx";
+import ViewMarks from "./pages/adminDashboard/offlineExamination/ViewMarks.jsx";
+import StudentsResult from "./pages/adminDashboard/offlineExamination/StudentResult.jsx";
+import CourseEnquiries from "./pages/adminDashboard/studentSection/CourseEnquiry.jsx";
 export const App = createBrowserRouter([
   {
     path: "/",
@@ -29,6 +35,13 @@ export const App = createBrowserRouter([
       { path: "student/:registrationNumber", element: <StudentDashboardUI /> },
       { path: "admin", element: <AdminLoginUI /> },
       { path: "dashboard", element: <DashboardUI /> },
+      { path: "centerDocument", element: <CenterDocument/> },
+      { path: "viewCertificate", element: <ViewCertificate/> },
+      { path: "addMarks", element: <AddMarks/> },
+      { path: "add-marks/:registrationNumber", element: <AddStudentsMarks/> },
+      { path: "viewMarks", element: <ViewMarks/> },
+      { path: "studentResult/:registrationNumber", element: <StudentsResult/> },
+      { path: "courseEnquiry", element: <CourseEnquiries/> },
     ],
   },
 ]);

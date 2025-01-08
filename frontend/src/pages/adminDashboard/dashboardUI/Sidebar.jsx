@@ -70,7 +70,7 @@ const Sidebar = () => {
                 See All Students
               </Link>
               <Link
-                to="/dashboard/CourseEnquiry"
+                to="/courseEnquiry"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />
@@ -98,7 +98,7 @@ const Sidebar = () => {
           {showCourseLinks && (
             <div className="pl-6 mt-2 space-y-1">
               <Link
-                to="/dashboard/CenterDocument"
+                to="/centerDocument"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />
@@ -135,7 +135,7 @@ const Sidebar = () => {
           {showCertificateLinks && (
             <div className="pl-6 mt-2 space-y-1">
               <Link
-                to="/dashboard/ViewCertificate"
+                to="/viewCertificate"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />
@@ -172,14 +172,14 @@ const Sidebar = () => {
           {showOfflineLinks && (
             <div className="pl-6 mt-2 space-y-1">
               <Link
-                to="/dashboard/addMarks"
+                to="/addMarks"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />
                 Add Marks
               </Link>
               <Link
-                to="/dashboard/ViewMarks"
+                to="/viewMarks"
                 className={`${linkStyle} flex items-center gap-2`}
               >
                 <FaRegCircle />
