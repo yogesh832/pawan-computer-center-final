@@ -51,6 +51,7 @@ export const App = createBrowserRouter([
       { path: "dashboard/seeallstudents", element: <SeeAllStudent /> },
       { path: "one-student/:registrationNumber", element: <Student /> },
       { path: "edit-student/:registrationNumber", element: <EditStudent /> },
+      // { path: "edit-student/:registrationNumber", element: <EditStudent /> },
     ],
   },
 ]);
