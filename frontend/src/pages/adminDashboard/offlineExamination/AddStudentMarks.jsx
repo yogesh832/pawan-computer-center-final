@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import InvalidError from "./InvalidError"; // Import the InvalidError component
 
 const AddStudentsMarks = () => {
   const { registrationNumber } = useParams();
@@ -112,14 +113,14 @@ const AddStudentsMarks = () => {
     }
   };
 
+  // Close the error prompt
+  const closeError = () => {
+    setError("");
+  };
+
   // Loading state while fetching student data
   if (loading) {
     return <div>Loading student data...</div>;
-  }
-
-  // Error state
-  if (error) {
-    return <div className="text-center text-red-600">{error}</div>;
   }
 
   return (
@@ -145,6 +146,9 @@ const AddStudentsMarks = () => {
           {message}
         </div>
       )}
+
+      {/* Display InvalidError component if there is an error */}
+      {error && <InvalidError message={error} onClose={closeError} />}
 
       <table className="min-w-full border-collapse border border-black">
         <thead>

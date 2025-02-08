@@ -1,11 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import Joi from "joi";
 import "react-toastify/dist/ReactToastify.css";
 import loginimg from "../../assets/loginpage.png";
+import Loading from "../../components/loading/Loading"; // Adjust the path if needed
 
 const SignUp = () => {
+  // Page-level loading and error states
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Form state for sign up info
   const [signUpInfo, setSignUpInfo] = useState({
     name: "",
     email: "",
@@ -34,18 +40,30 @@ const SignUp = () => {
     }),
   });
 
+  // Simulate a loading delay on initial page load
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      // Uncomment the next line to simulate an error on page load:
+      // setError("An error occurred while loading the sign up page.");
+    }, 1000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setSignUpInfo((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle form submission for sign up
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Validate the form data
-    const { error } = schema.validate(signUpInfo, { abortEarly: false });
-    if (error) {
-      error.details.forEach((err) => toast.error(err.message));
+    const { error: validationError } = schema.validate(signUpInfo, { abortEarly: false });
+    if (validationError) {
+      validationError.details.forEach((err) => toast.error(err.message));
       return;
     }
 
@@ -58,36 +76,46 @@ const SignUp = () => {
 
       const result = await response.json();
 
-      // Log the response and result for debugging
-      console.log("Response:", response); // Logs the entire response object
-      console.log("Result:", result); // Logs the response body from the server
+      console.log("Response:", response);
+      console.log("Result:", result);
 
       if (!response.ok) {
-        return toast.error(
-          result.message || "Sign up failed. Please try again."
-        );
+        return toast.error(result.message || "Sign up failed. Please try again.");
       }
 
       toast.success("Sign up successful!");
       setTimeout(() => navigate("/login"), 1000);
     } catch (err) {
-      console.error("Error:", err); // Logs any error that occurred in the try block
+      console.error("Error:", err);
       toast.error("Sign up failed. Please try again.");
     }
   };
 
+  // If still loading, show the spinner
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <Loading />
+      </div>
+    );
+  }
+
+  // If an error exists, show the error message
+  if (error) {
+    return (
+      <div className="text-center py-5">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  // Render the sign-up form once loading is complete and no error exists
   return (
     <>
-      <h1 className="text-center text-5xl font-bold mt-10 mb-5">
-        Sign Up Now!
-      </h1>
+      <h1 className="text-center text-5xl font-bold mt-10 mb-5">Sign Up Now!</h1>
       <div className="flex flex-col md:flex-row items-center justify-center p-6 min-h-screen">
         <div className="w-full md:w-1/2 p-6">
-          <img
-            src={loginimg}
-            alt="Sign Up"
-            className="w-full max-w-md mx-auto"
-          />
+          <img src={loginimg} alt="Sign Up" className="w-full max-w-md mx-auto" />
         </div>
 
         <form

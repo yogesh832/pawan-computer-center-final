@@ -5,13 +5,11 @@ import { MdDelete } from "react-icons/md";
 import { FaEye } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import Loading from "../../../components/loading/Loading";
-// import { Link } from "react-router-dom";
-// import BackBtn from "../BackBtnForAll/BackBtn";
 
 const SeeAllStudent = () =>{
     
   const [students, setStudents] = useState([]);
-  const [personalDetails, setPersonalDetails] = useState(null); // Store personal details
+  const [personalDetails, setPersonalDetails] = useState(null); 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -50,6 +48,7 @@ const SeeAllStudent = () =>{
     fetchStudents();
   }, []);
 
+  
   // Function to handle viewing details
   const handleViewDetails = (registrationNumber) => {
     fetchPersonalDetails(registrationNumber);
@@ -136,7 +135,7 @@ const SeeAllStudent = () =>{
           </table>
         </div>
       ) : (
-        <p className="text-center py-5">No student data available.</p> // No student data available
+        <p className="text-center py-5">No student data available.</p> 
       )}
 
       {/* Display personal details if available */}

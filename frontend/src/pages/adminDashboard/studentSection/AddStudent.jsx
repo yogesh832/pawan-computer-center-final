@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import axios from "axios";
 // import BackBtn from "../BackBtnForAll/BackBtn";
 // import { Link } from "react-router-dom";
-
+import Loading from "../../../components/loading/Loading"
 
 const AddStudent = () =>{
     
@@ -33,8 +33,9 @@ const AddStudent = () =>{
   });
 
   const [error, setError] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [selectedCourse, setSelectedCourse] = useState("");
+
 
   const courseOptions = {
     "": [],
@@ -147,6 +148,19 @@ const AddStudent = () =>{
   const categories = ["General", "OBC", "SC", "ST", "EWS"];
   const maritalStatuses = ["Single", "Married", "Divorced", "Widowed"];
 
+
+ // Simulate an initial loading delay of 1 second
+ useEffect(() => {
+  const timer = setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+  return () => clearTimeout(timer);
+}, []);
+  
+
+  
+
+
   const handleChange = (e) => {
     const { name, value, type, files } = e.target;
     if (type === "file") {
@@ -239,11 +253,22 @@ const AddStudent = () =>{
     }
   };
 
+  
+
+
   return (
     <div className="container mx-auto p-4">
-      {/* <Link to="/dashboard"> 
-      <BackBtn />
-      </Link> */}
+    {loading ? (
+      // Display the full-page loading spinner
+      <p className="text-center py-5">
+        <Loading />
+      </p>
+    ) : error ? (
+      // Display an error message if one exists
+      <p className="text-center py-5 text-red-500">{error}</p>
+    ) : (
+      // Otherwise, display the Add Student form
+      <>
       <h1 className="text-2xl font-semibold mb-4">Add Student</h1>
       <div className="bg-white p-6 rounded-lg shadow-md">
         <form onSubmit={handleSubmit}>
@@ -726,8 +751,11 @@ const AddStudent = () =>{
         </form>
 
         {error && <p className="text-red-500 mt-4">{error}</p>}
-      </div>
+        </div>
+        </>
+      )}
     </div>
   );
-}
+};
+
 export default AddStudent;

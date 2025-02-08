@@ -7,6 +7,8 @@ import bgImg from "../../../assets/bg-img.png";
 import bgBorder from "../../../assets/bgBorder.png"
 // import BackBtn from "../BackBtnForAll/BackBtn";
 
+import Loading from "../../../components/loading/Loading"
+
 const ViewCertificate = () => {
   const { registrationNumber } = useParams(); // Extracting registration number from URL params
   const [registrationNo, setRegistrationNo] = useState(""); // For manual input
@@ -131,121 +133,137 @@ const handleSubmit = async (event) => {
     });
   };
 
+
+  
+    useEffect(() => {
+      // Simulate a loading delay of 1 second.
+      const timer = setTimeout(() => {
+        setLoading(false);
+        // If there's an error, you could set it here using setError("Error message")
+      }, 1000);
+  
+      return () => clearTimeout(timer);
+    }, []);
+    
+
   return (
     <div className="container mx-auto p-4 min-h-screen">
-      <Link to="/dashboard">
-        {/* <BackBtn />/ */}
-      </Link>
-
-      <h1 className="text-3xl font-bold text-center mb-8">
-        Certificate Tracking
-      </h1>
-
-      {student && (
-        <button
-          onClick={downloadPDF}
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
-        >
-          Download Certificate as PDF
-        </button>
-      )}
-
-      {!student && (
-        <div className="bg-white p-4 rounded-md mb-4">
-          <h2 className="text-xl font-bold text-black mb-4">
-            Track Certificate
-          </h2>
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label
-                htmlFor="registrationNo"
-                className="block text-black text-sm font-bold mb-2"
-              >
-                Registration Number *
-              </label>
-              <input
-                type="text"
-                id="registrationNo"
-                value={registrationNo}
-                onChange={handleRegistrationNoChange}
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-            >
-              Submit Request
-            </button>
-          </form>
-          {error && <p className="text-red-500 mt-2">{error}</p>}
-        </div>
-      )}
-
       {loading ? (
-        <p className="text-center text-gray-500">Loading...</p>
+        // Loading state: show spinner
+        <p className="text-center py-5">
+          <Loading />
+        </p>
+      ) : error ? (
+        // Error state: show error message
+        <p className="text-center py-5 text-red-500">{error}</p>
       ) : (
-        student && (
-          <div
-            id="certificateDiv"
-            className="relative w-[900px] h-[594px] m-20 border-2 border-gray-400"
-          >
-            <img
-              src={bgImg}
-              alt="Background"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ zIndex: 1 }}
-            />
-            <img
-              src={bgBorder}
-              alt="Certificate Border"
-              className="absolute inset-0 w-full h-full object-cover"
-              style={{ zIndex: 2 }}
-            />
-            <div className="relative z-10 p-8 mx-[100px] my-[180px]">
-              <p className="leading-8 text-xl text-gray-700">
-                This is to certify that Mr./Miss.{" "}
-                <span className="text-base font-extrabold">
-                  {student.firstname} {student.lastname}
-                </span>
-                , S/O, D/O, W/O{" "}
-                <span className="text-base font-extrabold">
-                  {student.fathername}
-                </span>
-                , with the registration number{" "}
-                <span className="text-base font-extrabold">
-                  {student.registrationNumber}
-                </span>
-                , has successfully completed the{" "}
-                <span className="text-base font-extrabold">
-                  {student.courseOption}
-                </span>{" "}
-                course during the period of{" "}
-                <span className="text-base font-extrabold">
-                  {firstDate} to {lastDate}
-                </span>
-                . The grade obtained is{" "}
-                <span className="text-base font-extrabold">{marks.grade}</span>,
-                with a score of{" "}
-                <span className="text-base font-extrabold">
-                  {marks.totalMarks} out of{" "}
-                  {(marks.marksData ? marks.marksData.length : 0) * 100}
-                </span>{" "}
-                and with
-                <span className="text-base font-extrabold">
-                  {" "}
-                  {marks.percentage}%
-                </span>
-                . The course was conducted at{" "}
-                <span className="text-base font-extrabold">
-                  PAWAN COMPUTER CENTER
-                </span>
-                .
-              </p>
+        // Content to display once loading is complete and no error exists
+        <>
+          <Link to="/dashboard">
+            {/* <BackBtn /> */}
+          </Link>
+          <h1 className="text-3xl font-bold text-center mb-8">
+            Certificate Tracking
+          </h1>
+          {student ? (
+            <>
+              <button
+                onClick={downloadPDF}
+                className="bg-green-500 hover:bg-green-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4"
+              >
+                Download Certificate as PDF
+              </button>
+              <div
+                id="certificateDiv"
+                className="relative w-[900px] h-[594px] m-20 border-2 border-gray-400"
+              >
+                <img
+                  src={bgImg}
+                  alt="Background"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ zIndex: 1 }}
+                />
+                <img
+                  src={bgBorder}
+                  alt="Certificate Border"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  style={{ zIndex: 2 }}
+                />
+                <div className="relative z-10 p-8 mx-[100px] my-[180px]">
+                  <p className="leading-8 text-xl text-gray-700">
+                    This is to certify that Mr./Miss.{" "}
+                    <span className="text-base font-extrabold">
+                      {student.firstname} {student.lastname}
+                    </span>
+                    , S/O, D/O, W/O{" "}
+                    <span className="text-base font-extrabold">
+                      {student.fathername}
+                    </span>
+                    , with the registration number{" "}
+                    <span className="text-base font-extrabold">
+                      {student.registrationNumber}
+                    </span>
+                    , has successfully completed the{" "}
+                    <span className="text-base font-extrabold">
+                      {student.courseOption}
+                    </span>{" "}
+                    course during the period of{" "}
+                    <span className="text-base font-extrabold">
+                      {firstDate} to {lastDate}
+                    </span>
+                    . The grade obtained is{" "}
+                    <span className="text-base font-extrabold">{marks.grade}</span>,
+                    with a score of{" "}
+                    <span className="text-base font-extrabold">
+                      {marks.totalMarks} out of{" "}
+                      {(marks.marksData ? marks.marksData.length : 0) * 100}
+                    </span>{" "}
+                    and with{" "}
+                    <span className="text-base font-extrabold">
+                      {marks.percentage}%
+                    </span>
+                    . The course was conducted at{" "}
+                    <span className="text-base font-extrabold">
+                      PAWAN COMPUTER CENTER
+                    </span>
+                    .
+                  </p>
+                </div>
+              </div>
+            </>
+          ) : (
+            <div className="bg-white p-4 rounded-md mb-4">
+              <h2 className="text-xl font-bold text-black mb-4">
+                Track Certificate
+              </h2>
+              <form onSubmit={handleSubmit}>
+                <div className="mb-4">
+                  <label
+                    htmlFor="registrationNo"
+                    className="block text-black text-sm font-bold mb-2"
+                  >
+                    Registration Number *
+                  </label>
+                  <input
+                    type="text"
+                    id="registrationNo"
+                    value={registrationNo}
+                    onChange={handleRegistrationNoChange}
+                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    required
+                  />
+                </div>
+                <button
+                  type="submit"
+                  className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                >
+                  Submit Request
+                </button>
+              </form>
+              {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
-          </div>
-        )
+          )}
+        </>
       )}
     </div>
   );

@@ -7,6 +7,7 @@ const { deleteStudent } = require("../controller/studentController/deleteStudent
 const { oneStudent } = require("../controller/studentController/oneStudent.js");
 const addMarks = require("../controller/studentController/addMarks.js");
 const getResult = require("../controller/studentController/getResult.js");
+const allStudentMarks = require("../controller/studentController/allStudentMark.js");
 
 const router = express.Router();
 
@@ -36,5 +37,7 @@ router.get("/one-student/:registrationNumber", oneStudent);
 router.get("/all-student",  allStudents);
 router.post("/add-marks/:registrationNumber",  addMarks);
 router.get("/get-result/:registrationNumber",  getResult);
+router.get("/all-student-result",  allStudentMarks);
+
 
 module.exports = router;

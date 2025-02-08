@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import contactimg from "../../assets/contactimg.png";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loading from "../../components/loading/Loading"; // Adjust the path if needed
 
 function Contact() {
+  // Loading and error states for the page
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Form field states
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
 
+  // Simulate a loading delay (or replace with real async logic)
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+      // Uncomment and set an error if needed:
+      // setError("An error occurred while loading the contact form.");
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Handle form submission for sending email
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -32,6 +50,25 @@ function Contact() {
     }
   };
 
+  // If still loading, show the spinner
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <Loading />
+      </div>
+    );
+  }
+
+  // If an error exists, show the error message
+  if (error) {
+    return (
+      <div className="text-center py-5">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
+  // Render the Contact form once loading is complete and there's no error
   return (
     <div className="container mx-auto p-6 pt-10 md:p-10 lg:p-16 xl:p-24">
       <div className="text-center mb-12">

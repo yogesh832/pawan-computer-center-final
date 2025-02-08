@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Book } from "lucide-react";
 import GallerySection from "./GallerySection";
+import Loading from "../../components/loading/Loading"; // Adjust the path as needed
 
 const brandingImages = [
   {
@@ -57,6 +58,36 @@ const lifestyleImages = [
 ];
 
 const Gallery = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null); // Default to no error
+
+  useEffect(() => {
+    // Simulate a loading delay of 1 second.
+    const timer = setTimeout(() => {
+      setLoading(false);
+      // Uncomment the following line to simulate an error:
+      // setError("An error occurred while loading the gallery.");
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="text-center py-5">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="text-center py-5">
+        <p className="text-red-500">{error}</p>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-stone-100">
       {/* Hero Section */}
